@@ -1,5 +1,6 @@
 import { atom } from 'jotai'
 import { atomWithQuery } from 'jotai-tanstack-query'
+import { focusAtom } from 'jotai-optics'
 
 // Generate random users
 const fetchUsers = async () => {
@@ -31,3 +32,8 @@ export const usersWithLoadingAtom = atom((get) => {
     isLoading: query.isLoading,
   }
 })
+
+// Focused atom using jotai-optics - focuses on just the data property
+export const usersFocusedDataAtom = focusAtom(usersQueryAtom, (optic) =>
+  optic.prop('data')
+)

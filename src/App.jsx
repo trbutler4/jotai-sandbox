@@ -1,5 +1,6 @@
 import { FullQueryPage } from './pages/FullQueryPage'
 import { DerivedDataPage } from './pages/DerivedDataPage'
+import { FocusedDataPage } from './pages/FocusedDataPage'
 import './App.css'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <div className="content side-by-side">
         <FullQueryPage />
         <DerivedDataPage />
+        <FocusedDataPage />
       </div>
 
     </div>
