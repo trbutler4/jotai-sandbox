@@ -1,18 +1,20 @@
 import { atom } from 'jotai'
 import { atomWithQuery } from 'jotai-tanstack-query'
 
-// Simulated API endpoint - using JSONPlaceholder for demo
+// Generate random users
 const fetchUsers = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users')
-  if (!response.ok) throw new Error('Failed to fetch users')
-  return response.json()
+  await new Promise((r) => setTimeout(r, 100)) // simulate network delay
+  return Array.from({ length: 5 }, (_, i) => ({
+    id: i,
+    name: `User ${Math.random().toString(36).slice(2, 6)}`,
+  }))
 }
 
 // Full query atom - subscribers get { data, status, error, isLoading, isFetching, ... }
 export const usersQueryAtom = atomWithQuery(() => ({
   queryKey: ['users'],
   queryFn: fetchUsers,
-  staleTime: 5000, // 5 seconds - short for testing refetch behavior
+  refetchInterval: 1000, // refetch every second
 }))
 
 // Derived atom - subscribers ONLY get the data array
