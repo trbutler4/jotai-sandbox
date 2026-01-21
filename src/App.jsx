@@ -1,34 +1,45 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { FullQueryPage } from './pages/FullQueryPage'
+import { DerivedDataPage } from './pages/DerivedDataPage'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [page, setPage] = useState('full')
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="app">
+      <h1>Jotai Query Subscription Comparison</h1>
+
+      <nav className="nav">
+        <button
+          className={page === 'full' ? 'active' : ''}
+          onClick={() => setPage('full')}
+        >
+          Full Query Atom
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <button
+          className={page === 'derived' ? 'active' : ''}
+          onClick={() => setPage('derived')}
+        >
+          Derived Data Atom
+        </button>
+      </nav>
+
+      <div className="content">
+        {page === 'full' && <FullQueryPage />}
+        {page === 'derived' && <DerivedDataPage />}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <div className="instructions">
+        <h3>How to test:</h3>
+        <ol>
+          <li>Open browser DevTools console</li>
+          <li>Watch for render count logs as you switch between pages</li>
+          <li>Wait for data to become stale (5s) and refetch</li>
+          <li>Compare render counts between the two approaches</li>
+        </ol>
+      </div>
+    </div>
   )
 }
 
