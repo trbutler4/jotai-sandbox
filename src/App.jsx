@@ -12,15 +12,6 @@ function App() {
         <DerivedDataPage />
       </div>
 
-      <div className="instructions">
-        <h3>How to test:</h3>
-        <ol>
-          <li>Open browser DevTools console</li>
-          <li>Watch the render counts on both sides</li>
-          <li>Wait for data to become stale (5s) and refetch</li>
-          <li>Compare render counts between the two approaches</li>
-        </ol>
-      </div>
     </div>
   )
 }
